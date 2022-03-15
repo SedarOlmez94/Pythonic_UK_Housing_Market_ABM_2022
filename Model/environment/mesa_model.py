@@ -218,7 +218,8 @@ class MesaModel(Model):
                         MaxLoanToValue,
                         MortgageDuration,
                         StampDuty,
-                        scenario):
+                        scenario,
+                        intervention_step):
 
         self.running = True
         self.nRealtors = nRealtors
@@ -262,6 +263,7 @@ class MesaModel(Model):
         self.uniqueIDs = []
         self.moves = 0
         self.scenario = scenario
+        self.intervention_step = intervention_step
 
 
         # Create and distribute realtor agents.
@@ -655,8 +657,9 @@ class MesaModel(Model):
 
 
         # Shocks to the market at a specific timestep.
-        if(self.current_step == 200):
+        if(self.current_step == int(self.intervention_step)):
             if(self.scenario == "ratefall"):
+                print("ratefall!!!")
                 self.InterestRate = 10.0
             elif(self.scenario == "ltv"):
                 self.MaxLoanToValue = 60
