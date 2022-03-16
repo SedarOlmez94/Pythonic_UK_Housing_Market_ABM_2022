@@ -72,6 +72,41 @@ Example:
 ```
 
 
+# Important Python Scripts
+To adapt the macroeconomic parameters, access the **../Pythonic_UK_Housing_Market_ABM_2022/Model/input_params.py** before running your experiments and make any changes to the parameter values, these include:
+```python
+def __init__(self):
+        self.initialVacancyRate = 0.05
+        self.nRealtors = 6
+        self.InterestRate = 7.0
+        self.TicksPerYear = 4
+        self.maxHomelessPeriod = 5
+        self.interestPerTick = self.InterestRate / (self.TicksPerYear * 100)
+        self.min_price_fraction = 0.1
+        self.Inflation = 0.0 # %
+        self.CycleStrength = 0 # %
+        self.Affordability = 25 # %
+        self.Savings = 50 # %
+        self.ExitRate = 2 # %
+        self.EntryRate = 5 # %
+        self.MeanIncome = 30000 #pa
+        self.Shocked = 23 # %
+        self.BuyerSearchLength = 12
+        self.RealtorTerritory = 30 # originally 30
+        self.Locality = 3
+        self.RealtorMemory = 10 # steps
+        self.PriceDropRate = 3 # %
+        self.RealtorOptimism = 3 # %
+        self.InitialGeography = "Random"
+        self.Density = 70 # %
+        self.HouseConstructionRate = 0.30 # %
+        self.HouseMeanLifetime = 101
+        self.MaxLoanToValue = 97 # %
+        self.MortgageDuration = 25
+        self.StampDuty = True # bool
+```
+
+
 # Footnotes
 [^1]: ```Gilbert, N, Hawksworth, J C, and Sweeney, P (2008) 'An Agent-based Model of the UK Housing Market'. University of Surrey http://cress.soc.surrey.ac.uk/housingmarket/index.html```
 [^2]: ```MESA: https://mesa.readthedocs.io/en/latest/overview.html```
