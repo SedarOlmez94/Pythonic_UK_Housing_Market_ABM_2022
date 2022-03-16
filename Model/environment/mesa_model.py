@@ -659,7 +659,7 @@ class MesaModel(Model):
         # Shocks to the market at a specific timestep.
         if(self.current_step == int(self.intervention_step)):
             if(self.scenario == "ratefall"):
-                self.InterestRate = 10.0
+                self.InterestRate = 3.0
             elif(self.scenario == "ltv"):
                 self.MaxLoanToValue = 60
             elif(self.scenario == "influx"):
