@@ -63,15 +63,7 @@ Example:
 
 
 # Footnotes
-[^1]: ```
-@inproceedings{inproceedings,
-author = {Gilbert, Nigel and Hawksworth, John and Swinney, Paul},
-year = {2009},
-month = {01},
-pages = {30-35},
-title = {An Agent-Based Model of the English Housing Market.}
-}
-```
+[^1]: ```Gilbert, N, Hawksworth, J C, and Sweeney, P (2008) 'An Agent-based Model of the UK Housing Market'. University of Surrey http://cress.soc.surrey.ac.uk/housingmarket/index.html```
 
 
 
