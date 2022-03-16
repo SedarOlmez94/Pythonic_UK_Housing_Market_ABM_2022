@@ -56,14 +56,22 @@ Where the parameters within **<>** are the following:
 - <intervention_timestep> the model timestep (tick) at which the intervention should be triggered, must be an integer i.e., 200
 
 
+Example:
+```console
+(MESA_env) foo@bar:~$ python main_visualisation.py 60 60 "ratefall" 100
+```
+
+
 # Footnotes
-[^1]: ```@inproceedings{inproceedings,
+[^1]: ```
+@inproceedings{inproceedings,
 author = {Gilbert, Nigel and Hawksworth, John and Swinney, Paul},
 year = {2009},
 month = {01},
 pages = {30-35},
 title = {An Agent-Based Model of the English Housing Market.}
-}```
+}
+```
 
 
 
