@@ -6,7 +6,7 @@ Agent-based models built in the late 90's early 2000s were subject to constraine
 
 We propose a "remake" of the original and widely-adopted PwC UK Housing Market Agent-Based Model developed in the early 2000s by Nigel Gilbert, John C. Hawksworth and Paul A. Swinney[^1]. This new model version was developed in Python using the package MESA[^2], allowing users to utilise advanced machine learning/data science packages provided by Python's extensive collection of modern tools.
 
-# Licence
+# License
 Shield: [![CC BY-NC-SA 4.0][cc-by-nc-sa-shield]][cc-by-nc-sa]
 
 This work is licensed under a
