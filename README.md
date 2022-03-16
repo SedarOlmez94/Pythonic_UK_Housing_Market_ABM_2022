@@ -1,3 +1,6 @@
+[![DOI](https://zenodo.org/badge/470177027.svg)](https://zenodo.org/badge/latestdoi/470177027)
+
+
 # PwC UK Housing Market Agent-Based Model in Python 2022
 Agent-based models built in the late 90's early 2000s were subject to constrained programming frameworks, lacked extensibility, and are exclusively accessible by social-simulation practitioners who were the early pioneers of the most well-known ABM framework Netlogo. Many years later, a lot has changed. New programming methodologies, the rise of machine learning, data science and reproducibility frameworks have become the norm. These new methods have allowed social-simulation researchers to diversify their research, making their models more accessible reproducible and, by utilising advanced machine learning packages, uncover new insights from their models.
 
