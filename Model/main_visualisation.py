@@ -9,6 +9,8 @@ from environment.mesa_model import *
 from input_params import InputParameters
 from mesa.visualization.ModularVisualization import VisualizationElement
 import numpy as np
+import sys
+import getopt
 
 """
 Date edited: 09/03/22
@@ -21,8 +23,8 @@ Description:
 """
 
 # Set the size of the grid by x, y axes.
-GRID_SIZE_X = 61
-GRID_SIZE_Y = 61
+GRID_SIZE_X = int(sys.argv[1])
+GRID_SIZE_Y = int(sys.argv[2])
 
 #Create a visual depiction of an agent type in the environment grid.
 # r: radius size if 1 then matches the size of the grid cell.
@@ -147,7 +149,8 @@ server = ModularServer(MesaModel, [grid, chart_houses, people_charts, median_hou
                          "MaxLoanToValue":input_parameters.MaxLoanToValue,
                          "MortgageDuration":input_parameters.MortgageDuration,
                          "StampDuty":input_parameters.StampDuty,
-                         "scenario":input_parameters.scenario})
+                         "scenario":sys.argv[3],
+                         "intervention_step":sys.argv[4]})
 
 
 server.port = 8524
