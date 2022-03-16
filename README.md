@@ -50,10 +50,10 @@ To run the model, type the following command:
 
 
 Where the parameters within **<>** are the following:
-- <grid_x> the number of cells on the x-axis, must be an integer i.e., 60
-- <grid_y> the number of cells on the y-axis, must be an integer i.e., 60
-- <intervention> the intervention to occur, could be one of **"ratefall", "ltv", "influx", "poorentrants"** or **"none"** must be in quotation marks. Refer to the original paper[^1], to know what each intervention does.
-- <intervention_timestep> the model timestep (tick) at which the intervention should be triggered, must be an integer i.e., 200
+- <grid_x>  The number of cells on the x-axis, must be an integer i.e., 60
+- <grid_y>  The number of cells on the y-axis, must be an integer i.e., 60
+- <intervention>  The intervention to occur, could be one of **"ratefall", "ltv", "influx", "poorentrants"** or **"none"** must be in quotation marks. Refer to the original paper[^1], to know what each intervention does.
+- <intervention_timestep>  The model timestep (tick) at which the intervention should be triggered, must be an integer i.e., 200
 
 
 Example:
