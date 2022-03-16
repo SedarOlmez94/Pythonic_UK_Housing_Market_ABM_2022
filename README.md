@@ -14,6 +14,60 @@ This work is licensed under a
 [cc-by-nc-sa-shield]: https://img.shields.io/badge/License-CC%20BY--NC--SA%204.0-lightgrey.svg
 
 
+## Instructions
+
+
+### Installation
+The following programming language and packages were used in the planning, development and running  stages of the model. These packages or a subsequent version will need to be installed before the model can be run locally.
+
+
+1. **Python** version 3.9.7: https://www.python.org/downloads/release/python-397/
+2. **Anaconda** version 4.11.0: https://www.anaconda.com/products/individual
+
+
+### Install Conda Environment
+A conda environmeny **.yml** file can be found in the **/model/MESA_env.yml** subdirectory. This contains the setup including python packages used to run the model. Once python and anaconda have been installed, do the following:
+
+
+1. Navigate to the cloned repository directory **../Pythonic_UK_Housing_Market_ABM_2022/Model/** using terminal in OSX/Linux or command prompt using windows.
+2. Type the following and hit enter:
+```console
+foo@bar:~$ conda env create --file MESA_env.yml
 ```
-$ python main_visualisation.py <grid_x> <grid_y> <intervention> <intervention_timestep>
+
+
+### Running The Model
+Once the conda environment has successfully installed, you must activate the environment before you can run the model. Do this by running the following command in the directory **../Pythonic_UK_Housing_Market_ABM_2022/Model/**:
+```console
+foo@bar:~$ conda activate MESA_env
 ```
+
+
+To run the model, type the following command:
+```console
+(MESA_env) foo@bar:~$ python main_visualisation.py <grid_x> <grid_y> <intervention> <intervention_timestep>
+```
+
+
+Where the parameters within **<>** are the following:
+- <grid_x> the number of cells on the x-axis, must be an integer i.e., 60
+- <grid_y> the number of cells on the y-axis, must be an integer i.e., 60
+- <intervention> the intervention to occur, could be one of **"ratefall", "ltv", "influx", "poorentrants"** or **"none"** must be in quotation marks. Refer to the original paper[^1], to know what each intervention does.
+- <intervention_timestep> the model timestep (tick) at which the intervention should be triggered, must be an integer i.e., 200
+
+
+Example:
+```console
+(MESA_env) foo@bar:~$ python main_visualisation.py 60 60 "ratefall" 100
+```
+
+
+# Footnotes
+[^1]: ```Gilbert, N, Hawksworth, J C, and Sweeney, P (2008) 'An Agent-based Model of the UK Housing Market'. University of Surrey http://cress.soc.surrey.ac.uk/housingmarket/index.html```
+
+
+
+
+
+
+
