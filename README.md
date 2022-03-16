@@ -110,6 +110,23 @@ def __init__(self):
 ```
 
 
+# Reference
+If you use this model in your work, please reference it using the following citation:
+```
+@software{sedar_olmez_2022_6362146,
+  author       = {Sedar Olmez},
+  title        = {{SedarOlmez94/Pythonic\_UK\_Housing\_Market\_ABM\_2022: 
+                   UK Housing Market Model 2022}},
+  month        = mar,
+  year         = 2022,
+  publisher    = {Zenodo},
+  version      = {v.1.0.0},
+  doi          = {10.5281/zenodo.6362146},
+  url          = {https://doi.org/10.5281/zenodo.6362146}
+}
+```
+
+
 # Footnotes
 [^1]: ```Gilbert, N, Hawksworth, J C, and Sweeney, P (2008) 'An Agent-based Model of the UK Housing Market'. University of Surrey http://cress.soc.surrey.ac.uk/housingmarket/index.html```
 [^2]: ```MESA: https://mesa.readthedocs.io/en/latest/overview.html```
