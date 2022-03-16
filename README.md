@@ -1,3 +1,6 @@
+[![DOI](https://zenodo.org/badge/470177027.svg)](https://zenodo.org/badge/latestdoi/470177027)
+
+
 # PwC UK Housing Market Agent-Based Model in Python 2022
 Agent-based models built in the late 90's early 2000s were subject to constrained programming frameworks, lacked extensibility, and are exclusively accessible by social-simulation practitioners who were the early pioneers of the most well-known ABM framework Netlogo. Many years later, a lot has changed. New programming methodologies, the rise of machine learning, data science and reproducibility frameworks have become the norm. These new methods have allowed social-simulation researchers to diversify their research, making their models more accessible reproducible and, by utilising advanced machine learning packages, uncover new insights from their models.
 
@@ -45,6 +48,14 @@ foo@bar:~$ conda activate MESA_env
 ```
 
 
+or
+
+
+```console
+foo@bar:~$ source activate MESA_env
+```
+
+
 To run the model, type the following command:
 ```console
 (MESA_env) foo@bar:~$ python main_visualisation.py <grid_x> <grid_y> <intervention> <intervention_timestep>
@@ -61,6 +72,58 @@ Where the parameters within **<>** are the following:
 Example:
 ```console
 (MESA_env) foo@bar:~$ python main_visualisation.py 60 60 "ratefall" 100
+```
+
+
+# Important Python Scripts
+To adapt the macroeconomic parameters, access the **../Pythonic_UK_Housing_Market_ABM_2022/Model/input_params.py** before running your experiments and make any changes to the parameter values, these include:
+```python
+def __init__(self):
+        self.initialVacancyRate = 0.05
+        self.nRealtors = 6
+        self.InterestRate = 7.0
+        self.TicksPerYear = 4
+        self.maxHomelessPeriod = 5
+        self.interestPerTick = self.InterestRate / (self.TicksPerYear * 100)
+        self.min_price_fraction = 0.1
+        self.Inflation = 0.0 # %
+        self.CycleStrength = 0 # %
+        self.Affordability = 25 # %
+        self.Savings = 50 # %
+        self.ExitRate = 2 # %
+        self.EntryRate = 5 # %
+        self.MeanIncome = 30000 #pa
+        self.Shocked = 23 # %
+        self.BuyerSearchLength = 12
+        self.RealtorTerritory = 30 # originally 30
+        self.Locality = 3
+        self.RealtorMemory = 10 # steps
+        self.PriceDropRate = 3 # %
+        self.RealtorOptimism = 3 # %
+        self.InitialGeography = "Random"
+        self.Density = 70 # %
+        self.HouseConstructionRate = 0.30 # %
+        self.HouseMeanLifetime = 101
+        self.MaxLoanToValue = 97 # %
+        self.MortgageDuration = 25
+        self.StampDuty = True # bool
+```
+
+
+# Reference
+If you use this model in your work, please reference it using the following citation:
+```
+@software{sedar_olmez_2022_6362146,
+  author       = {Sedar Olmez},
+  title        = {{SedarOlmez94/Pythonic\_UK\_Housing\_Market\_ABM\_2022: 
+                   UK Housing Market Model 2022}},
+  month        = mar,
+  year         = 2022,
+  publisher    = {Zenodo},
+  version      = {v.1.0.0},
+  doi          = {10.5281/zenodo.6362146},
+  url          = {https://doi.org/10.5281/zenodo.6362146}
+}
 ```
 
 
