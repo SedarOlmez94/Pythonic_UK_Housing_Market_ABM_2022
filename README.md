@@ -45,6 +45,14 @@ foo@bar:~$ conda activate MESA_env
 ```
 
 
+or
+
+
+```console
+foo@bar:~$ source activate MESA_env
+```
+
+
 To run the model, type the following command:
 ```console
 (MESA_env) foo@bar:~$ python main_visualisation.py <grid_x> <grid_y> <intervention> <intervention_timestep>
