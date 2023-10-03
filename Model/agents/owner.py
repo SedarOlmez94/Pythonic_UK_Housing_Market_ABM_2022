@@ -24,6 +24,94 @@ Parameters:
 
 
 class Owner(Agent):
+    """
+    A class representing an owner agent in a housing simulation.
+
+    Parameters:
+    owner_id (int): Unique identifier for the owner.
+    my_house: The house owned by the owner.
+    model: The simulation model this owner is part of.
+
+    Attributes:
+    owner_id (int): Unique identifier for the owner.
+    my_house: The house owned by the owner.
+    agent_type (str): Type of agent, set to "Owner".
+    income (float): Income of the owner.
+    mortgage (float): Mortgage amount of the owner.
+    repayment (float): Repayment amount for the mortgage.
+    capital (float): Capital of the owner.
+    date_of_purchase: Date when the owner purchased the house.
+    made_offer_on: House the owner has made an offer on.
+    homeless (int): Indicator for the owner being homeless.
+
+    Methods:
+    step():
+        Perform a step in the simulation for the owner agent.
+
+    assign_income(current_timestep):
+        Assign income to the owner based on simulation parameters.
+
+    make_offer(houses_for_sale, ticks):
+        Make an offer on a suitable property for purchase.
+
+    move_house(model, ticks, record_id):
+        Move to the house the owner is buying and handle related transactions.
+
+    follow_chain():
+        Find the end of the chain which has the owner's house as a link.
+
+    get_made_offer():
+        Get the house the owner has made an offer on.
+
+    set_made_offer_on(offer):
+        Set the house the owner has made an offer on.
+
+    set_homeless(value):
+        Set the homeless indicator for the owner.
+
+    get_homeless():
+        Get the homeless indicator for the owner.
+
+    set_income(new_income):
+        Set the income of the owner.
+
+    get_capital():
+        Get the capital of the owner.
+
+    set_capital(capital_n):
+        Set the capital of the owner.
+
+    get_income():
+        Get the income of the owner.
+
+    set_date_of_purchase(date):
+        Set the date of purchase for the owner.
+
+    set_mortgage(new_mortgage):
+        Set the mortgage amount for the owner.
+
+    get_mortgage():
+        Get the mortgage amount for the owner.
+
+    get_my_house():
+        Get the house owned by the owner.
+
+    set_my_house(house):
+        Set the house owned by the owner.
+
+    get_owner_id():
+        Get the unique identifier of the owner.
+
+    set_repayment(new_repayment):
+        Set the repayment amount for the owner.
+
+    get_repayment():
+        Get the repayment amount for the owner.
+
+    stamp_duty_land_tax(cost):
+        Calculate stamp duty land tax based on the cost of a property.
+    """
+
     def __init__(self, owner_id, my_house, model):
         super().__init__(owner_id, model)
         self.owner_id = owner_id
