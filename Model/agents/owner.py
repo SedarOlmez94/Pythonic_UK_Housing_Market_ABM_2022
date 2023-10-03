@@ -1,4 +1,5 @@
 from mesa import Agent
+
 # from input_params import InputParameters
 from agents.records import Records
 import numpy as np
@@ -21,8 +22,8 @@ Parameters:
     homeless - count of the number of periods that this owner has been without a house.
 """
 
-class Owner(Agent):
 
+class Owner(Agent):
     def __init__(self, owner_id, my_house, model):
         super().__init__(owner_id, model)
         self.owner_id = owner_id
@@ -41,15 +42,19 @@ class Owner(Agent):
         "Step function for the owner agent, what does it do when it is activated?"
 
     def assign_income(self, current_timestep):
-        ALPHA = 1.3 #shape parameter
-        LAMBDA = 1 / 20000 #scale parameter
+        ALPHA = 1.3  # shape parameter
+        LAMBDA = 1 / 20000  # scale parameter
         MEANINCOME = self.model.MeanIncome
         INFLATION = self.model.Inflation
         TICKSPERYEAR = self.model.TicksPerYear
         SAVINGS = self.model.Savings
 
-        while(self.income < MEANINCOME / 2):
-            self.set_income((MEANINCOME * LAMBDA / ALPHA) * (np.random.gamma(shape = ALPHA, scale=ALPHA/LAMBDA)) * (1 + (INFLATION / (TICKSPERYEAR * 100))) ** current_timestep)
+        while self.income < MEANINCOME / 2:
+            self.set_income(
+                (MEANINCOME * LAMBDA / ALPHA)
+                * (np.random.gamma(shape=ALPHA, scale=ALPHA / LAMBDA))
+                * (1 + (INFLATION / (TICKSPERYEAR * 100))) ** current_timestep
+            )
 
         self.set_capital(self.income * SAVINGS / 100)
 
@@ -72,16 +77,22 @@ class Owner(Agent):
          ;;  The realtor notes the interest shown in each of the houses in this subset
         """
 
-        new_mortgage = self.get_income() * self.model.Affordability / (self.model.interestPerTick * self.model.TicksPerYear * 100)
+        new_mortgage = (
+            self.get_income()
+            * self.model.Affordability
+            / (self.model.interestPerTick * self.model.TicksPerYear * 100)
+        )
         budget = new_mortgage - self.stamp_duty_land_tax(new_mortgage)
 
         deposit = self.get_capital()
-        #if is-house? my-house [ set deposit deposit + ([ sale-price ] of my-house - mortgage) ]
-        if(self.get_my_house() != None):
-            deposit = deposit + (self.get_my_house().get_sale_price() - self.get_mortgage())
+        # if is-house? my-house [ set deposit deposit + ([ sale-price ] of my-house - mortgage) ]
+        if self.get_my_house() != None:
+            deposit = deposit + (
+                self.get_my_house().get_sale_price() - self.get_mortgage()
+            )
 
         upperbound = budget + deposit
-        if(self.model.MaxLoanToValue < 100):
+        if self.model.MaxLoanToValue < 100:
             values = []
             values.append(budget + deposit)
             values.append(deposit / (1 - self.model.MaxLoanToValue / 100))
@@ -91,34 +102,39 @@ class Owner(Agent):
         ; if I am in negative equity, I cannot afford to buy a house and
         ;  will have to remain where I am
         """
-        if(upperbound < 0):
+        if upperbound < 0:
             self.get_my_house().set_for_sale(False)
             return
 
         lowerbound = upperbound * 0.7
         current_house = self.get_my_house()
-        interesting_house = [i for i in houses_for_sale if (not i.get_offered_to()) and
-                                                            (i.get_sale_price() <= upperbound) and
-                                                            (i.get_sale_price() > lowerbound) and
-                                                            (i != current_house)]
+        interesting_house = [
+            i
+            for i in houses_for_sale
+            if (not i.get_offered_to())
+            and (i.get_sale_price() <= upperbound)
+            and (i.get_sale_price() > lowerbound)
+            and (i != current_house)
+        ]
 
         """
         ; if there are more interesting houses than the buyer's search length,
         ;   select that number at random
         """
-        if(len(interesting_house) > self.model.BuyerSearchLength):
-            interesting_house = random.sample(interesting_house, self.model.BuyerSearchLength)
+        if len(interesting_house) > self.model.BuyerSearchLength:
+            interesting_house = random.sample(
+                interesting_house, self.model.BuyerSearchLength
+            )
 
-        if(len(interesting_house) > 0):
-            #;select the best that has not already had an offer on it
-            property = max(interesting_house, key=attrgetter('sale_price'))
-            #; if I have found a suitable property, place an offer for it
-            if(property != None):
+        if len(interesting_house) > 0:
+            # ;select the best that has not already had an offer on it
+            property = max(interesting_house, key=attrgetter("sale_price"))
+            # ; if I have found a suitable property, place an offer for it
+            if property != None:
                 property.set_offered_to(self)
                 property.set_offer_date(ticks)
 
                 self.made_offer_on = property
-
 
     def move_house(self, model, ticks, record_id):
         """
@@ -127,48 +143,65 @@ class Owner(Agent):
         """
         new_house = self.get_made_offer()
 
-        if(new_house == None):
+        if new_house == None:
             return
 
         seller = new_house.get_owner()
 
-        if(seller != None):
-            #; seller gets selling price to pay off mortgage or add to capital
+        if seller != None:
+            # ; seller gets selling price to pay off mortgage or add to capital
             profit = new_house.get_sale_price() - seller.get_mortgage()
             seller.set_mortgage(0)
 
-            if(profit > 0):
-                #; seller has made a profit, which is kept as capital
+            if profit > 0:
+                # ; seller has made a profit, which is kept as capital
                 seller.set_capital(seller.get_capital() + profit)
 
         new_house.set_owner(self)
 
         duty = self.stamp_duty_land_tax(new_house.get_sale_price())
 
-        if(new_house.get_sale_price() > self.get_capital()):
+        if new_house.get_sale_price() > self.get_capital():
             """
             (income * Affordability /
                                         ( interestPerTick * ticksPerYear * 100 ))
             """
             list_ = []
-            list_.append((self.get_income() * self.model.Affordability / (self.model.interestPerTick * self.model.TicksPerYear * 100)))
+            list_.append(
+                (
+                    self.get_income()
+                    * self.model.Affordability
+                    / (self.model.interestPerTick * self.model.TicksPerYear * 100)
+                )
+            )
             list_.append(new_house.get_sale_price() * self.model.MaxLoanToValue / 100)
-            #; if the owner can't pay for the house in cash, s/he has to have a mortgage
-            #; borrow as much as possible, given owner's income and value of house
+            # ; if the owner can't pay for the house in cash, s/he has to have a mortgage
+            # ; borrow as much as possible, given owner's income and value of house
             self.set_mortgage(np.min(list_))
-            #; pay rest from capital
-            self.set_capital(self.get_capital() - int(new_house.get_sale_price() - self.get_mortgage()) - duty)
+            # ; pay rest from capital
+            self.set_capital(
+                self.get_capital()
+                - int(new_house.get_sale_price() - self.get_mortgage())
+                - duty
+            )
 
-            self.set_repayment(self.get_mortgage() * self.model.interestPerTick / (1 - ( 1 + self.model.interestPerTick) ** ( - self.model.MortgageDuration * self.model.TicksPerYear)))
+            self.set_repayment(
+                self.get_mortgage()
+                * self.model.interestPerTick
+                / (
+                    1
+                    - (1 + self.model.interestPerTick)
+                    ** (-self.model.MortgageDuration * self.model.TicksPerYear)
+                )
+            )
         else:
-            #; or if cash buyer, don't need mortgage and use capital
+            # ; or if cash buyer, don't need mortgage and use capital
             self.set_mortgage(0)
             self.set_repayment(0)
             self.set_capital(self.get_capital() - new_house.get_sale_price() - duty)
 
-        if(self.get_capital() < 0):
+        if self.get_capital() < 0:
             self.set_capital(0)
-
 
         model.grid.place_agent(self, new_house.pos)
 
@@ -183,17 +216,15 @@ class Owner(Agent):
 
         self.set_made_offer_on(None)
 
-        #;; update realtor's history with this sale price
+        # ;; update realtor's history with this sale price
         record = Records(record_id, new_house, new_house.get_sale_price(), ticks, model)
         model.schedule.add(record)
         new_house.get_my_realtor().file_record(record)
 
         model.moves += 1
 
-        if(seller != None):
+        if seller != None:
             seller.move_house(model, ticks, model.get_new_id())
-
-
 
     def follow_chain(self):
         """
@@ -204,19 +235,18 @@ class Owner(Agent):
         ;; continue until the seller of that house is the first buyer.
         ;;   This is a successful chain; Stop
         """
-        if(self.get_made_offer() == None):
+        if self.get_made_offer() == None:
             return False
 
         seller = self.get_made_offer().get_owner()
 
-        if(seller == None):
+        if seller == None:
             return True
 
-        if(self == seller):
+        if self == seller:
             return True
 
         return seller.follow_chain()
-
 
     def get_made_offer(self):
         return self.made_offer_on
@@ -267,11 +297,11 @@ class Owner(Agent):
         return self.repayment
 
     def stamp_duty_land_tax(self, cost):
-        if (self.model.StampDuty):
-            if(cost > 500000):
+        if self.model.StampDuty:
+            if cost > 500000:
                 return 0.04 * cost
-            if(cost > 250000):
+            if cost > 250000:
                 return 0.02 * cost
-            if(cost > 150000):
+            if cost > 150000:
                 return 0.01 * cost
         return 0

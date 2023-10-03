@@ -13,6 +13,7 @@ Parameters:
     date - the date in which the transaction was made (step).
 """
 
+
 class Records(Agent):
     def __init__(self, record_id, the_house, selling_price, date, model):
         super().__init__(record_id, model)
@@ -21,7 +22,6 @@ class Records(Agent):
         self.the_house = the_house
         self.selling_price = selling_price
         self.date = date
-
 
     def get_record_ID(self):
         return self.record_id

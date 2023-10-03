@@ -24,15 +24,14 @@ Parameters:
 
 
 class House(Agent):
-
     def __init__(self, house_id, model):
         super().__init__(house_id, model)
-        self.house_id = house_id #Each House object has a unique ID.
+        self.house_id = house_id  # Each House object has a unique ID.
         self.agent_type = "House"
         self.my_owner = None
         self.local_realtors = []
         self.quality = 0
-        self.for_sale = False # == for_sale?
+        self.for_sale = False  # == for_sale?
         self.sale_price = 0
         self.date_for_sale = None
         self.my_realtor = None
@@ -43,7 +42,6 @@ class House(Agent):
 
     def step(self):
         "IMPORTANT! The agents step goes here! What does it do?"
-
 
     def demolish(self, agents_list):
         """
@@ -70,23 +68,22 @@ class House(Agent):
           die
         end
         """
-        if(self.get_owner() != None):
+        if self.get_owner() != None:
             owner = self.get_owner()
             owner.set_my_house(None)
             # cancel mortgage
             owner.set_mortgage(0)
             owner.set_repayment(0)
 
-        #; if this house is on a realtor's record, remove the record
+        # ; if this house is on a realtor's record, remove the record
         for realtors in agents_list:
-            if(realtors.agent_type == "Realtor"):
-                if(self in realtors.get_realtor_houses()):
+            if realtors.agent_type == "Realtor":
+                if self in realtors.get_realtor_houses():
                     realtors.unfile_record(self)
-
-
 
     def get_house_ID(self):
         return self.house_id
+
     # Setter method, the local_realtors variable will be assigned the
     # list of realtors in which the house is located in.
     def set_local_realtors(self, realtors):
@@ -103,7 +100,8 @@ class House(Agent):
 
     def set_offered_to(self, owner):
         self.offered_to = owner
-    #show that this house is for sale.
+
+    # show that this house is for sale.
     def put_on_market(self, step):
         self.for_sale = True
         self.date_for_sale = step
@@ -146,7 +144,7 @@ class House(Agent):
 
     def set_realtor_valuation(self, list_of_houses):
         valuations = {}
-        #set my-realtor max-one-of local-realtors [ valuation myself ]
+        # set my-realtor max-one-of local-realtors [ valuation myself ]
         for realtor in self.get_list_of_local_realtors():
             valuations[realtor] = realtor.valuation(self, list_of_houses)
 
