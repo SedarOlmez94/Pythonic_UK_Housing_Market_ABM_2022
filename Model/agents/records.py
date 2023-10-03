@@ -15,6 +15,37 @@ Parameters:
 
 
 class Records(Agent):
+    """
+    A class representing a record of a house sale in a housing simulation.
+
+    Parameters:
+    record_id (int): Unique identifier for the record.
+    the_house: The house associated with the record.
+    selling_price (float): Selling price of the house in the record.
+    date: Date when the sale occurred.
+    model: The simulation model this record is part of.
+
+    Attributes:
+    record_id (int): Unique identifier for the record.
+    agent_type (str): Type of agent, set to "Record".
+    the_house: The house associated with the record.
+    selling_price (float): Selling price of the house in the record.
+    date: Date when the sale occurred.
+
+    Methods:
+    get_record_ID():
+        Get the unique identifier of the record.
+
+    get_record_house():
+        Get the house associated with the record.
+
+    get_record_selling_price():
+        Get the selling price of the house in the record.
+
+    get_record_date():
+        Get the date when the sale occurred.
+    """
+
     def __init__(self, record_id, the_house, selling_price, date, model):
         super().__init__(record_id, model)
         self.record_id = record_id

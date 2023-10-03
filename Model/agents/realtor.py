@@ -19,6 +19,69 @@ Parameters:
 
 
 class Realtor(Agent):
+    """
+    A class representing a realtor agent in a housing simulation.
+
+    Parameters:
+    realtor_id (int): Unique identifier for the realtor.
+    company: The real estate company the realtor is associated with.
+    model: The simulation model this realtor is part of.
+
+    Attributes:
+    realtor_id (int): Unique identifier for the realtor.
+    agent_type (str): Type of agent, set to "Realtor".
+    company: The real estate company the realtor is associated with.
+    my_houses (list): List of houses associated with the realtor.
+    sales (list): List of sales records made by the realtor.
+    average_price (float): Average sale price of the realtor's houses.
+
+    Methods:
+    step():
+        Perform a step in the simulation for the realtor agent.
+
+    get_realtor_id():
+        Get the unique identifier of the realtor.
+
+    get_realtor_company():
+        Get the real estate company associated with the realtor.
+
+    get_realtor_houses():
+        Get the list of houses associated with the realtor.
+
+    get_realtor_sales():
+        Get the list of sales records made by the realtor.
+
+    remove_sales_from_list(sale):
+        Remove a sale record from the realtor's sales list.
+
+    get_realtor_average_price():
+        Get the average sale price of the realtor's houses.
+
+    set_realtor_average_price(houses):
+        Set the average sale price of the realtor's houses.
+
+    file_record(record):
+        Add a sales record to the realtor's sales list.
+
+    unfile_record(house):
+        Remove sales records associated with a specific house.
+
+    get_records():
+        Get the list of sales records made by the realtor.
+
+    move():
+        Move the realtor to a new position.
+
+    valuation(property, houses):
+        Calculate the valuation of a property based on local sales records.
+
+    stamp_duty_land_tax(cost):
+        Calculate stamp duty land tax based on the cost of a property.
+
+    calc_distance(p1, p2):
+        Calculate the Euclidean distance between two points.
+    """
+
     def __init__(self, realtor_id, company, model):
         super().__init__(realtor_id, model)
 
