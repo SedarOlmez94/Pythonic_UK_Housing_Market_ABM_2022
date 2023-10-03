@@ -24,6 +24,105 @@ Parameters:
 
 
 class House(Agent):
+    """
+    A class representing a house in a simulation.
+
+    Parameters:
+    house_id (int): Unique identifier for the house.
+    model: The simulation model this house is part of.
+
+    Attributes:
+    house_id (int): Unique identifier for the house.
+    agent_type (str): Type of agent, set to "House".
+    my_owner: The owner of the house.
+    local_realtors (list): List of local realtors associated with the house.
+    quality (int): Quality index of the house.
+    for_sale (bool): Indicates if the house is for sale.
+    sale_price (float): Sale price of the house.
+    date_for_sale: Date when the house was put up for sale.
+    my_realtor: The realtor associated with the house.
+    offered_to: Owner to whom the house is offered.
+    offer_date: Date when the house was offered.
+    end_of_life: Date when the house reaches the end of its life cycle.
+    occupied (bool): Indicates if the house is occupied.
+
+    Methods:
+    step():
+        Perform a step in the simulation for the house.
+
+    demolish(agents_list):
+        Demolish the house and handle related references.
+
+    get_house_ID():
+        Get the unique identifier of the house.
+
+    set_local_realtors(realtors):
+        Set the local realtors associated with the house.
+
+    get_list_of_local_realtors():
+        Get the list of local realtors associated with the house.
+
+    set_offer_date(date):
+        Set the date when the house was offered for sale.
+
+    get_offered_to():
+        Get the owner to whom the house is offered.
+
+    set_offered_to(owner):
+        Set the owner to whom the house is offered.
+
+    put_on_market(step):
+        Mark the house as for sale.
+
+    is_house_for_sale():
+        Check if the house is for sale.
+
+    get_date_for_sale():
+        Get the date when the house was put up for sale.
+
+    set_end_of_life(end_of_life):
+        Set the end-of-life date for the house.
+
+    set_for_sale(decision):
+        Set whether the house is for sale or not.
+
+    get_end_of_life():
+        Get the end-of-life date for the house.
+
+    set_owner(owner):
+        Set the owner of the house.
+
+    get_owner():
+        Get the owner of the house.
+
+    set_sale_price(new_price):
+        Set the sale price of the house.
+
+    get_sale_price():
+        Get the sale price of the house.
+
+    set_quality_index(quality_index):
+        Set the quality index of the house.
+
+    get_quality():
+        Get the quality index of the house.
+
+    get_for_sale():
+        Check if the house is for sale.
+
+    set_realtor_valuation(list_of_houses):
+        Set the realtor associated with the house based on valuation.
+
+    set_realtor():
+        Set a random realtor associated with the house.
+
+    get_my_realtor():
+        Get the realtor associated with the house.
+
+    price_diff(a_house):
+        Calculate the price difference between this house and another house.
+    """
+
     def __init__(self, house_id, model):
         super().__init__(house_id, model)
         self.house_id = house_id  # Each House object has a unique ID.
